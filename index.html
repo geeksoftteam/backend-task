@@ -1,0 +1,388 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TickerBase</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#things-we-care-about" class="toc-h2 toc-link" data-title="Things we care about">Things we care about</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#project-description" class="toc-h1 toc-link" data-title="Project Description">Project Description</a>
+          </li>
+          <li>
+            <a href="#ticks" class="toc-h1 toc-link" data-title="Ticks">Ticks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-tick" class="toc-h2 toc-link" data-title="Create Tick">Create Tick</a>
+                  </li>
+                  <li>
+                    <a href="#get-ticks" class="toc-h2 toc-link" data-title="Get Ticks">Get Ticks</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#candles" class="toc-h1 toc-link" data-title="Candles">Candles</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-daily-candles" class="toc-h2 toc-link" data-title="Get Daily Candles">Get Daily Candles</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<ol>
+<li>Your task is to implement an API based on this documentation.</li>
+<li>The API can be written in any framework you feel most comfortable with.</li>
+<li>We do not give any deadline. Take your time and write as best code as you can.</li>
+<li>Provide the solution with complete Git commits history.</li>
+</ol>
+<h3 id='things-we-care-about'>Things we care about</h3>
+<ol>
+<li>Code quality.</li>
+</ol>
+<h1 id='project-description'>Project Description</h1>
+<p>Image you are a broker and want to create a simple database for ticks (prices)
+for different currency pairs (like <code>EURUSD</code>, <code>PLNUSD</code> etc). You will save the ticks
+manually using REST endpoint. You need to query these ticks based on
+dates to display them on chart and you also need daily candles (max, min and
+average values of prices). The codename for this app will be: &quot;TickerBase&quot;.</p>
+
+<p>Good Luck!</p>
+
+<aside class="notice">
+Remember! No login required. Write just the API, without UI!
+</aside>
+<h1 id='ticks'>Ticks</h1><h2 id='create-tick'>Create Tick</h2>
+<p>This endpoint saves the tick to database.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://example.com/api/ticks</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>Symbol name like <code>EURUSD</code>, <code>BTCUSD</code>, <code>USDPLN</code></td>
+</tr>
+<tr>
+<td>price</td>
+<td>Current price</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Timestamp of tick in milliseconds</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Please note that you don't have to get real prices of currencies pairs. Let's assume
+that another service which is connected to real feed of prices will use your API
+to store the ticks to database.
+</aside>
+<h2 id='get-ticks'>Get Ticks</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/ticks/EURUSD?timestamp_from=1533831495547&amp;timestamp_to=1533832497547"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1614"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1533831495547</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1617"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1533831497547</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1616"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1533832497547</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint queries database for ticks based on given interval with ascending order.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/api/ticks/{symbol}</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>Queried symbol name</td>
+</tr>
+<tr>
+<td>timestamp_from</td>
+<td>Start of queried interval</td>
+</tr>
+<tr>
+<td>timestamp_to</td>
+<td>End of queried interval</td>
+</tr>
+</tbody></table>
+<h1 id='candles'>Candles</h1><h2 id='get-daily-candles'>Get Daily Candles</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/candles/EURUSD"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1670"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1682"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avg_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1678"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-02"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"min_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1662"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"max_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1667"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avg_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.1675"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint queries database for daily candles from current month.
+Candle is a structure aggregated by day and containing minimum, maximum and average prices during that day.
+Average is calculated by taking all prices during that day into consideration.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://example.com/api/candles/{symbol}</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>Queried symbol name</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
