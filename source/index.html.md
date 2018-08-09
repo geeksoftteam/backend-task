@@ -1,98 +1,62 @@
 ---
-title: API Reference
+title: TickerBase
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
-
-search: true
+search: false
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+1. Your task is to implement an API based on this documentation.
+2. The API can be written in any framework you feel most comfortable with.
+3. We do not give any deadline. Take your time and write as best code as you can.
+4. Provide the solution with complete Git commits history.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+### Things we care about
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+1. Code quality.
 
-# Authentication
+# Project Description
 
-> To authorize, use this code:
+Image you are a broker and want to create a simple database for ticks (prices)
+for different currency pairs (like `EURUSD`, `PLNUSD` etc). You will save the ticks
+manually using REST endpoint. You need to query these ticks based on
+dates to display them on chart and you also need daily candles (max, min and
+average values of prices). The codename for this app will be: "TickerBase".
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Good Luck!
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Remember! No login required. Write just the API, without UI!
 </aside>
 
-# Kittens
+# Ticks
 
-## Get All Kittens
+## Create Tick
 
-```ruby
-require 'kittn'
+This endpoint saves the tick to database.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+### HTTP Request
 
-```python
-import kittn
+`POST http://example.com/api/ticks`
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+symbol | Symbol name like `EURUSD`, `BTCUSD`, `USDPLN`
+price | Current price
+timestamp | Timestamp of tick in milliseconds
+
+<aside class="notice">
+Please note that you don't have to get real prices of currencies pairs. Let's assume
+that another service which is connected to real feed of prices will use your API
+to store the ticks to database.
+</aside>
+
+## Get Ticks
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "http://example.com/api/ticks/EURUSD?timestamp_from=1533831495547&timestamp_to=1533832497547"
 ```
 
 > The above command returns JSON structured like this:
@@ -100,140 +64,71 @@ let kittens = api.kittens.get();
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "price": "1.1614",
+    "timestamp": 1533831495547
   },
   {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "price": "1.1617",
+    "timestamp": 1533831497547
+  },
+  {
+    "price": "1.1616",
+    "timestamp": 1533832497547
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint queries database for ticks based on given interval with ascending order.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://example.com/api/ticks/{symbol}`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Description
+--------- | -----------
+symbol | Queried symbol name
+timestamp_from | Start of queried interval
+timestamp_to | End of queried interval
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+# Candles
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Get Daily Candles
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl "http://example.com/api/candles/EURUSD"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+[
+  {
+    "date": "2018-08-01",
+    "min_price": "1.1670",
+    "max_price": "1.1682",
+    "avg_price": "1.1678"
+  },
+  {
+    "date": "2018-08-02",
+    "min_price": "1.1662",
+    "max_price": "1.1667",
+    "avg_price": "1.1675"
+  }
+]
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint queries database for daily candles from current month.
+Candle is a structure aggregated by day and containing minimum, maximum and average prices during that day.
+Average is calculated by taking all prices during that day into consideration.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://example.com/api/candles/{symbol}`
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
+### Query Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to delete
-
+symbol | Queried symbol name
