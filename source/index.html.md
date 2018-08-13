@@ -17,16 +17,12 @@ search: false
 
 # Project Description
 
-Image you are a broker and want to create a simple database for ticks (prices)
-for different currency pairs (like `EURUSD`, `PLNUSD` etc). You will save the ticks
-manually using REST endpoint. You need to query these ticks based on
-dates to display them on chart and you also need daily candles (max, min and
-average values of prices). The codename for this app will be: "TickerBase".
+Imagine you are a broker employee and have been assigned a task to create a simple database collecting ticks (prices) for different currency pairs (like `EURUSD`, `PLNUSD` etc). First, save ticks manually using REST endpoint. Then, query these ticks based on dates in order to display them in the form of tick chart (chart containing all ticks collected throughout the day) and daily candles chart (containing daily intervals with max, min and average prices). The codename of this app will be: "TickerBase".
 
 Good Luck!
 
 <aside class="notice">
-Remember! No login required. Write just the API, without UI!
+Attention! No login required, write an API without UI!
 </aside>
 
 # Ticks
@@ -48,9 +44,7 @@ price | Current price
 timestamp | Timestamp of tick in milliseconds
 
 <aside class="notice">
-Please note that you don't have to get real prices of currencies pairs. Let's assume
-that another service which is connected to real feed of prices will use your API
-to store the ticks to database.
+Please note that you don't have to get live currency pairs’ prices. Let's assume that another service connected to live price feed uses your API to store ticks to the database.
 </aside>
 
 ## Get Ticks
@@ -119,9 +113,7 @@ curl "http://example.com/api/candles/EURUSD"
 ]
 ```
 
-This endpoint queries database for daily candles from current month.
-Candle is a structure aggregated by day and containing minimum, maximum and average prices during that day.
-Average is calculated by taking all prices during that day into consideration.
+This endpoint queries database for daily candles from current month. The candle is a structure containing daily minimum, maximum and average prices. The min, max, and average price is calculated based on all prices for a specified day.
 
 ### HTTP Request
 
