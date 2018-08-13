@@ -356,9 +356,7 @@ Please note that you don't have to get live currency pairs’ prices. Let's assu
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint queries database for daily candles from current month.
-Candle is a structure aggregated by day and containing minimum, maximum and average prices during that day.
-Average is calculated by taking all prices during that day into consideration.</p>
+<p>This endpoint queries database for daily candles from current month. The candle is a structure containing daily minimum, maximum and average prices. The min, max, and average price is calculated based on all prices for a specified day.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET http://example.com/api/candles/{symbol}</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
