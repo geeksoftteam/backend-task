@@ -258,16 +258,12 @@
 <li>Code quality.</li>
 </ol>
 <h1 id='project-description'>Project Description</h1>
-<p>Image you are a broker and want to create a simple database for ticks (prices)
-for different currency pairs (like <code>EURUSD</code>, <code>PLNUSD</code> etc). You will save the ticks
-manually using REST endpoint. You need to query these ticks based on
-dates to display them on chart and you also need daily candles (max, min and
-average values of prices). The codename for this app will be: &quot;TickerBase&quot;.</p>
+<p>Imagine you are a broker employee and have been assigned a task to create a simple database collecting ticks (prices) for different currency pairs (like <code>EURUSD</code>, <code>PLNUSD</code> etc). First, save ticks manually using REST endpoint. Then, query these ticks based on dates in order to display them in the form of tick chart (chart containing all ticks collected throughout the day) and daily candles chart (containing daily intervals with max, min and average prices). The codename of this app will be: &quot;TickerBase&quot;.</p>
 
 <p>Good Luck!</p>
 
 <aside class="notice">
-Remember! No login required. Write just the API, without UI!
+Attention! No login required, write an API without UI!
 </aside>
 <h1 id='ticks'>Ticks</h1><h2 id='create-tick'>Create Tick</h2>
 <p>This endpoint saves the tick to database.</p>
@@ -295,9 +291,7 @@ Remember! No login required. Write just the API, without UI!
 </tbody></table>
 
 <aside class="notice">
-Please note that you don't have to get real prices of currencies pairs. Let's assume
-that another service which is connected to real feed of prices will use your API
-to store the ticks to database.
+Please note that you don't have to get live currency pairs’ prices. Let's assume that another service connected to live price feed uses your API to store ticks to the database.
 </aside>
 <h2 id='get-ticks'>Get Ticks</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/ticks/EURUSD?timestamp_from=1533831495547&amp;timestamp_to=1533832497547"</span>
 </code></pre>
